@@ -30,3 +30,4 @@ refOutput*.txt
 !integration_algorithm
 !nlp
 !process
+!my_examples
