@@ -150,7 +150,7 @@ int main(int argc, char *const argv[])
     mpc.set(GENERATE_SIMULINK_INTERFACE, NO);
 
     // Export to the package in the ROS2 workspace
-    if (mpc.exportCode("./ACADO_code") != SUCCESSFUL_RETURN)
+    if (mpc.exportCode("../../../ros_ws/src/speedcar_mpc/externals") != SUCCESSFUL_RETURN)
         exit(EXIT_FAILURE);
     mpc.printDimensionsQP();
 
