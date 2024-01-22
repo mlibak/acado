@@ -41,8 +41,8 @@ int main(int argc, char *const argv[])
     // VEHICLE PARAMETERS
     // -----------------------------
 
-    const double l_f = 0.17;
-    const double l_r = 0.16;
+    const double l_f = 1.46205; // In Unity -> 7 times larger
+    const double l_r = 1.41395; // In Unity -> 7 times larger
 
     // Wheelbase, [m]
     const double l = l_f + l_r;
@@ -124,7 +124,7 @@ int main(int argc, char *const argv[])
     ocp.subjectTo(sqrt((x - x_cl) * (x - x_cl) + (y - y_cl) * (y - y_cl)) - racetrack_width / 2 <= 0);
 
     // Set number of OnlineData(OD) manualy
-    //     Corrects a bug in ACADO where wrong number of ODs is stored
+    // Corrects a bug in ACADO where wrong number of ODs is stored
     ocp.setNOD(3);
 
     // ***************************************************
@@ -150,7 +150,7 @@ int main(int argc, char *const argv[])
     mpc.set(GENERATE_SIMULINK_INTERFACE, NO);
 
     // Export to the package in the ROS2 workspace
-    if (mpc.exportCode("../../../ros_ws/src/speedcar_mpc/externals") != SUCCESSFUL_RETURN)
+    if (mpc.exportCode("../../../ros_ws/src/speedcar_mpc/externals/acado") != SUCCESSFUL_RETURN)
         exit(EXIT_FAILURE);
     mpc.printDimensionsQP();
 
