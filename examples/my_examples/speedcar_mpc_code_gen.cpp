@@ -57,7 +57,7 @@ int main(int argc, char *const argv[])
 
     f << dot(x) == v * cos(psy + atan((l_r / l) * tan(delta_f)));
     f << dot(y) == v * sin(psy + atan((l_r / l) * tan(delta_f)));
-    f << dot(v) == 20 * a;
+    f << dot(v) == a;
     f << dot(psy) == (v / l_r) * sin(atan((l_r / l) * tan(delta_f)));
 
     // -----------------------------
@@ -103,9 +103,9 @@ int main(int argc, char *const argv[])
     // STATIC CONSTRAINTS
     // -----------------------------
 
-    // Velocity up to 108 [kmh] -> 30 [m/s]
-    ocp.subjectTo(v <= 30);
-    ocp.subjectTo(-1 <= a <= 1);
+    // Velocity up to 70 [kmh] -> 19.4 [m/s]
+    ocp.subjectTo(v <= 19.4);
+    ocp.subjectTo(-100 <= a <= 100);
 
     // Steering angle ±28 [degrees] -> ±0.4886921906 [rad]
     ocp.subjectTo(-0.4886921906 <= delta_f <= 0.4886921906);
@@ -117,22 +117,22 @@ int main(int argc, char *const argv[])
     // Constraints for lane boundaries
 
     // X coordinate of the track's centerline
-    OnlineData x_cl;
-    // // Y coordinate of the track's centerline
-    OnlineData y_cl;
-    // Race track's width
+    // OnlineData x_cl;
+    // // // Y coordinate of the track's centerline
+    // OnlineData y_cl;
+    // // Race track's width
     // OnlineData racetrack_width;
     // double racetrack_width = 7;
-    double racetrack_width = 4 * 4;
+    // double racetrack_width = 4 * 4;
 
     // ocp.subjectTo(sqrt((x - x_cl) * (x - x_cl) + (y - y_cl) * (y - y_cl)) + racetrack_width >= 0);
     // ocp.subjectTo(sqrt((x - x_cl) * (x - x_cl) + (y - y_cl) * (y - y_cl)) - racetrack_width <= 0);
 
-    ocp.subjectTo((x - x_cl) * (x - x_cl) + (y - y_cl) * (y - y_cl) - racetrack_width <= 0);
+    // ocp.subjectTo((x - x_cl) * (x - x_cl) + (y - y_cl) * (y - y_cl) - racetrack_width / 2 <= 0);
 
     // Set number of OnlineData(OD) manualy
     // Corrects a bug in ACADO where wrong number of ODs is stored
-    ocp.setNOD(2);
+    // ocp.setNOD(3);
 
     // ***************************************************
     // CODE GENERATION
