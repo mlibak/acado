@@ -104,8 +104,15 @@ int main(int argc, char *const argv[])
     // -----------------------------
 
     // Velocity up to 70 [kmh] -> 19.4 [m/s]
-    ocp.subjectTo(v <= 19.4);
-    ocp.subjectTo(-100 <= a <= 100);
+    // Velocity up to 100 [kmh] -> 27.7777777778 [m/s]
+    // ocp.subjectTo(v <= 27.7777777778);
+    // ocp.subjectTo(v <= (100 / 3.6));
+
+    // Acceleration from -10 [m/s^2] to +10 [m/s^2]
+    ocp.subjectTo(-10 <= a <= 10);
+
+    // Acceleration is 0
+    // ocp.subjectTo(a == 0.0);
 
     // Steering angle ±28 [degrees] -> ±0.4886921906 [rad]
     ocp.subjectTo(-0.4886921906 <= delta_f <= 0.4886921906);
